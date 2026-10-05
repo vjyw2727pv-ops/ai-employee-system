@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام موظفين AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <h1>نظام موظفين AI</h1>
+        <span class="badge">لوحة التحكم</span>
+      </header>
+
+      <section class="summary-grid">
+        <div class="card accent">
+          <h3>إجمالي المهام</h3>
+          <p>{{ data.summary.total_tasks }}</p>
+        </div>
+        <div class="card success">
+          <h3>المهام المكتملة</h3>
+          <p>{{ data.summary.completed_tasks }}</p>
+        </div>
+        <div class="card warning">
+          <h3>العيوب المصححة</h3>
+          <p>{{ data.summary.fixed_issues }}</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>المدير</h2>
+        <div class="role-box">
+          <div>
+            <strong>الاسم:</strong> {{ data.manager.name }}
+          </div>
+          <div>
+            <strong>عدد المهام:</strong> {{ data.manager.tasks_count }}
+          </div>
+        </div>
+
+        <ul class="task-list">
+          {% for task in data.manager.tasks %}
+            <li>
+              <span>{{ task.name }}</span>
+              <span class="status {{ task.status }}">{{ task.status }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="two-column">
+        <div class="panel">
+          <h2>المبرمج 1</h2>
+          <ul>
+            {% for feature in data.developers[0].features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h2>المبرمج 2</h2>
+          <ul>
+            {% for module in data.developers[1].modules %}
+              <li>{{ module }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel bug-panel">
+        <h2>مصحح الأخطاء</h2>
+        <ul>
+          {% for issue in data.bug_fixer.fixed_issues %}
+            <li>{{ issue }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
