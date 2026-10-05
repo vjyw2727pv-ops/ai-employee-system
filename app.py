@@ -50,18 +50,12 @@ def dashboard():
     system.manager.mark_task_done(task2)
 
     data = {
-        "manager": {
-            "name": system.manager.name,
-            "tasks": system.manager.tasks,
-        },
+        "manager": {"name": system.manager.name, "tasks": system.manager.tasks},
         "developers": [
             {"name": system.dev1.name, "features": system.dev1.completed_features},
             {"name": system.dev2.name, "modules": system.dev2.completed_modules},
         ],
-        "bug_fixer": {
-            "name": system.bug_fixer.name,
-            "fixed_issues": system.bug_fixer.fixed_issues,
-        },
+        "bug_fixer": {"name": system.bug_fixer.name, "fixed_issues": system.bug_fixer.fixed_issues},
         "summary": {
             "total_tasks": len(system.manager.tasks),
             "completed_tasks": sum(1 for t in system.manager.tasks if t["status"] == "done"),
