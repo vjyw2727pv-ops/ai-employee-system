@@ -1,2 +1,46 @@
-# ai-employee-system
-AI Employee System with Manager, Developer, and Bug Fixer roles
+# AI Employee System
+
+نظام موظفي ذكاء اصطناعي متعدد الأدوار
+
+## الأدوار المتاحة
+
+### 1. المدير (Manager)
+- إدارة المشاريع
+- توزيع المهام
+- متابعة التقدم
+- اتخاذ القرارات الإدارية
+
+### 2. المبرمج (Developer)
+- تطوير وكتابة الكود
+- معالجة المتطلبات التقنية
+- تصحيح الأخطاء البرمجية
+- توثيق الكود
+
+### 3. المبيعات (Sales)
+- إدارة المبيعات
+- التفاوض مع العملاء
+- إنشاء العروض والاقتراحات
+- متابعة العملاء
+
+## البنية
+
+```
+ai-employee-system/
+├── manager/
+│   ├── manager.py
+│   └── tasks.json
+├── developer/
+│   ├── developer.py
+│   └── projects.json
+├── sales/
+│   ├── sales.py
+│   └── clients.json
+├── core/
+│   ├── ai_agent.py
+│   └── database.py
+└── README.md
+```
+
+## الاستخدام
+
+سيتم توثيق طريقة الاستخدام لاحقاً...
