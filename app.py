@@ -1,12 +1,37 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
 from core.system import AIEmployeeSystem
 
 app = Flask(__name__)
+app.secret_key = "ai_employee_secret_key"
 
 
-def build_dashboard_data():
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == "admin" and password == "1234":
+            session["user"] = username
+            return redirect(url_for("dashboard"))
+
+        return render_template("login.html", error="اسم المستخدم أو كلمة المرور غير صحيحة")
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
+
+
+@app.route("/")
+def dashboard():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
     system = AIEmployeeSystem()
-
     task1 = system.manager.create_task("واجهة تسجيل الدخول", "إنشاء صفحة تسجيل الدخول", "high")
     system.manager.assign_task(task1, system.dev1.name)
     system.dev1.build_feature("واجهة تسجيل الدخول")
@@ -24,21 +49,14 @@ def build_dashboard_data():
     system.manager.mark_task_done(task1)
     system.manager.mark_task_done(task2)
 
-    return {
+    data = {
         "manager": {
             "name": system.manager.name,
-            "tasks_count": len(system.manager.tasks),
             "tasks": system.manager.tasks,
         },
         "developers": [
-            {
-                "name": system.dev1.name,
-                "features": system.dev1.completed_features,
-            },
-            {
-                "name": system.dev2.name,
-                "modules": system.dev2.completed_modules,
-            },
+            {"name": system.dev1.name, "features": system.dev1.completed_features},
+            {"name": system.dev2.name, "modules": system.dev2.completed_modules},
         ],
         "bug_fixer": {
             "name": system.bug_fixer.name,
@@ -46,16 +64,12 @@ def build_dashboard_data():
         },
         "summary": {
             "total_tasks": len(system.manager.tasks),
-            "completed_tasks": sum(1 for task in system.manager.tasks if task["status"] == "done"),
+            "completed_tasks": sum(1 for t in system.manager.tasks if t["status"] == "done"),
             "fixed_issues": len(system.bug_fixer.fixed_issues),
         },
     }
 
-
-@app.route("/")
-def index():
-    data = build_dashboard_data()
-    return render_template("index.html", data=data)
+    return render_template("dashboard.html", data=data)
 
 
 if __name__ == "__main__":
