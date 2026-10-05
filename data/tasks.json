@@ -1,12 +1,20 @@
 {
   "tasks": [
     {
+      "id": 1,
       "name": "واجهة تسجيل الدخول",
-      "status": "completed"
+      "description": "إنشاء صفحة تسجيل الدخول",
+      "priority": "high",
+      "status": "done",
+      "assignee": "المبرمج 1"
     },
     {
+      "id": 2,
       "name": "نظام المصادقة",
-      "status": "completed"
+      "description": "إنشاء منطق المصادقة في الخادم",
+      "priority": "critical",
+      "status": "done",
+      "assignee": "المبرمج 2"
     }
   ]
 }

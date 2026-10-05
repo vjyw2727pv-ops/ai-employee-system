@@ -1,6 +1,11 @@
 from core.system import AIEmployeeSystem
 
 
-if __name__ == "__main__":
+def main():
+    print("=== نظام موظفين AI ===")
     system = AIEmployeeSystem()
     system.run()
+
+
+if __name__ == "__main__":
+    main()
