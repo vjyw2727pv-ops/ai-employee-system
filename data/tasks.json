@@ -1,0 +1,12 @@
+{
+  "tasks": [
+    {
+      "name": "واجهة تسجيل الدخول",
+      "status": "completed"
+    },
+    {
+      "name": "نظام المصادقة",
+      "status": "completed"
+    }
+  ]
+}
